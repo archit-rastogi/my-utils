@@ -36,3 +36,6 @@ is_colocated(database(Db), true) :- db_table(Db, _), not is_colocated(database(D
 :- with_colocation(database(Db), X), with_colocation(database(Db), Y), X != Y.
 :- with_colocation(db_table(Db, Table), X), with_colocation(db_table(Db, Table), Y), X != Y.
 :- is_colocated(database(Db), false), with_colocation(db_table(DB, Table), true).
+
+#show with_colocation/2.
+#show is_colocated/2.
