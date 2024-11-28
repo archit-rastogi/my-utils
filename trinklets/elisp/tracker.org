@@ -1,0 +1,34 @@
+* <2024-11-28 Thu 14:18> Projects /Ideas [0/17]
+** WIP A TCP server that renders arbitrary JSON                   :learning:
+*** TODO Use tablist mode to render json structure recieved via tcp socket
+** TODO Yugabytedb yba like TUI                                   :yugabyte:
+*** TODO Tablist all portals                                     :yugabyte:
+*** TODO Tablist for portal universes                            :yugabyte:
+- list all universes
+*** TODO Transient driven interface for yba
+1. [ ] Do a rolling restart
+2. [ ] Refresh contents
+3. [ ] List nodes - tablist
+4. [ ] ybadmin tooling
+5. [ ] list sst files
+6. [ ] list tables, tablets
+7. [ ] setup universe
+*** TODO Embark integration
+** TODO Dynamic UI driven by external service                      :general:
+- shadow context
+- generate actionable menus in runtime
+** TODO Observability
+** TODO A smart Task Triager
+** TODO Inter-operability with collaborative editing tools
+- google sheets <-> org
+** TODO Better text tables with spanning rows and columns
+** TODO Text tables backed by remote entities
+** TODO Ordering rows should re-order list
+- if backed by remote entity and ordering is improtant
+- for example, list of task - reorders
+** TODO Working with graphs in org-mode
+- a heading may be re-used, linked
+- model relationships between sibling, parents
+- a heading can be backed by remote entity, and entity can be multi-dimensional
+** TODO Org-mode as a user interface ?
+** TODO Test designer in org-mode
