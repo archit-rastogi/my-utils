@@ -1,0 +1,62 @@
+* Ideas / Use cases <2024-11-27 Wed 21:22>
+** TODO YugabyteDb
+*** DONE DDL Syntax - Database and table creation with colocation
+CLOSED: [2024-11-27 Wed 21:31]
+- model to capture what combination of database x table x colocation/regular and defaults
+  |                           | Table is colocated | Table is non-colocated |
+  |---------------------------+--------------------+------------------------|
+  | database is colocated     | yes                | yes                    |
+  | database is non-colocated | no                 | no                     |
+- if database is colocated, tables are colocated by default
+- if database is non-colocated, tables are non-colocated by default
+- example: given N databases and M tables per database, generate valid, different combinations
+*** TODO Geo-partition + colocation scenarios
+*** TODO Upgrade paths Testing - Generate upgrade paths
+- stable path upgrade
+- chain upgrades
+  - latest in each branch
+  - within branch
+*** TODO Reconstructing node / table / tablet history from meta data, logs, etc.
+- [ ] compaction
+- [ ] bootstrap
+- [ ] flush
+*** TODO Advanced or smart Query generation
+*** TODO Generating stress scenarios
+*** TODO Generating topologies and transitions
+- [ ] single to multiple regions
+- [ ] preferred leader
+- [ ] leader blacklisting
+- [ ] shared master -> dedicated master
+- [ ] tserver / master re-joining cluster
+- [ ] read-replicas
+- [ ] multiple disks
+- [ ] bootstrapping
+- [ ] deleting tablet and doing remote bootstrap
+- [ ] under-replication -> replication
+** TODO Persist enumerated solutions and reuse
+- [ ] Can we turn specs into executable code ?
+  1. enumerate and persist
+  2. transform into a truthtable or state transition table
+  3. normalize / reduce / optimize the truth table
+  4. interpret input based on (3)
+** TODO A smart test framework
+1. Compose steps to generate scenarios
+2. Understands scope and lifecycle of domain objects
+** TODO Use ASP to manage emacs buffers
+- use it for rendering
+- use it to manage workspace
+- use it to build workflows
+* TODO Proof Of Concepts [0/8]
+** TODO Interfaces
+*** TODO Invoke external code from ASP
+1. [ ] invoke python code
+2. [ ] invoke a prolog code
+*** TODO Pass grounded terms as arguments to an ASP grounder
+*** TODO Enumerate solutions with ASP from external program
+*** TODO Modularizing ASP
+- what are different ways to modularize ?
+- how to import or export rules or compose them ?
+** TODO Explore temporal reasoning / Actions DSLs
+** TODO Reflection
+*** TODO Can we reflect upon an ASP module ?
+- [ ] enumerate known predicates and terms
