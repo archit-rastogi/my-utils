@@ -1,0 +1,67 @@
+* objectives
+** Iteration 1
+1. Execute each instance of workload during the test.
+2. Combine each yba op with workload instance.
+3. Combine each yba op with a known nemesis while workload is running.
+4. Each nemesis must act on a type of node.
+
+** All must happen while steady state
+- no leaderless tablets
+- no under replication
+- steady state - system metrics
+  - disk
+  - network
+  - memory
+  - cpu
+** Workload creator
+1. user selects pre-defined apps
+2. Or, user defines schema, queries/txns and execution strategy.
+* TODO Tasks
+** TODO Test generation
+*** TODO Choose and Combine ops 2 at a time, distinct.
+** TODO UI to action mapping.
+** TODO [Workload] Create a workload app that can dynamically increase / decrease workload
+** TODO How to plan and execute a steady state ?
+* <2024-12-17 Tue 21:07> brainstorming
+1. Define base relations like child-parent, verbs
+2. Different kinds of child-parent verbs
+   - filter based on <criteria>
+     - is split into, is split
+     - contains, is contained by
+   - composed of, composes: is a required or an optional
+   - enumeration of same types
+     - has sub-classes, is a sub-class of
+     - item of list, has items
+3. Criteria
+   - another list of entity, items, concerns
+4. Object types
+   - entity
+   - concerns applies to entity
+   - aspect, set of similar properties of entity
+   - behavior of entity
+5. Operations like
+   - selection, filtering
+
+
+operators has list of items - <. <=, >, >=, != etc.
+ - class of inequality opertors in operators
+ - class of partial orders
+
+ list of data types - int,
+** User flow
+1. create a scenario
+   1. pick a scenario type: stress, perf, stress+perf, functional
+   2. scenario must have a target entity -> universe
+   3. scenario must have one or more actors
+      - user
+        + acts upon workloads - start, stop, restart, etc.
+        + creates a schema and picks designs a workload
+      - ybadmin
+      - dbadmin
+2. Ways to create scenario
+   1. user starts with a workload to run. target and actor selection become implicit.
+   2. user then selects a scenario type
+   3. user defines an intent, user story, etc.
+3. N possible scenarios are generated and ranked.
+** How to implement
+1. Start scenario generation with fixed workload and actions.

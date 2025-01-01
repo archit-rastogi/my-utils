@@ -1,0 +1,19 @@
+* Notes <2024-12-27 Fri 16:24>
+1. we need to build build system that does adbuctive reasoning.
+2. User flow:
+   - User enter a query and asks why it has regressed ?
+* Goals
+1. Why is my cluster slow ?
+2. Why were there many latency spikes in the last 2 hours?
+3. Why did throughput drop between 2pm and 3pm (say, within the last 24 hours)?
+4. Why does a particular query run slower now than last week?
+* WIP Tasks for POC
+** DONE Identify a sub-problem - sql query latency increase
+CLOSED: [2024-12-27 Fri 16:41]
+** TODO Build a UI to let user enter a query and do abduction.
+
+* References
+** [[https://docs.google.com/document/d/1PiEonN1xjfjRUzkZ0g4QldP1-VNjDeBwbzs85rqiJOk/edit?tab=t.0][Observability and troubleshooting in Yb]]
+** [[https://docs.google.com/document/d/1xtVxTnJErMJpRF3KrZOkqBHBaUvF8naNJjN6Y5EIwes/edit?tab=t.0][Troubleshooting Service PoC Design]]
+
+* Query high latency

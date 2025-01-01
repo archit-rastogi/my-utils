@@ -46,17 +46,74 @@ CLOSED: [2024-11-27 Wed 21:31]
 - use it for rendering
 - use it to manage workspace
 - use it to build workflows
-* TODO Proof Of Concepts [0/8]
-** TODO Interfaces
-*** TODO Invoke external code from ASP
-1. [ ] invoke python code
-2. [ ] invoke a prolog code
+** TODO Data generation tool for given dsn
+** TODO Entity / Schema generation
+** TODO A software update is safe to Release
+- inspired by [[https://arxiv.org/abs/2408.11699][Automating Semantic Analysis of System Assurance Cases using Goal-directed ASP]]
+- Software certification refers to assuring that a software system’s risk is acceptable
+** TODO Master fail-over
+** TODO Smart handling of region failures
+- [[https://yugabyte.slack.com/archives/C02AEKG6F46/p1704584168525689][Topology aware smart driver handling of region failures]]
+** TODO Compute PG compatibility score
+- inspired by [[https://github.com/secp256k1-sha256/postgres-compatibility-index/blob/main/postgres-compatibility-index/readme.md][PostgreSQL Compatibility Index]]
+* TODO pg15 Upgrade
+1. [ ] online upgrade
+2. [ ] correctness verification
+* TODO Proof Of Concepts [4/14]
+** TODO Playground - ASP by potassco
+*** DONE Invoke external code from ASP - Python
+CLOSED: [2024-12-05 Thu 14:35]
+1. [X] invoke python code
+
+Notes:
+- Install clingo in a condo environment
+- Do a pip install
+
+*** INVALID Invoke external code from ASP - Prolog
+CLOSED: [2024-12-16 Mon 17:04]
+:LOGBOOK:
+- State "INVALID"    from "TODO"       [2024-12-16 Mon 17:04] \\
+  With s(CASP) we dont really need as ASP semantics are embedded within prolog language.
+:END:
+- Use python <-> prolog bridge
 *** TODO Pass grounded terms as arguments to an ASP grounder
+- [ ] use constants
+- [ ] can we use a separate input spec with lp spec ?
 *** TODO Enumerate solutions with ASP from external program
+*** TODO Hands-on with heuristics
+*** TODO Hands-on with external terms
 *** TODO Modularizing ASP
 - what are different ways to modularize ?
 - how to import or export rules or compose them ?
+*** DONE unzip a list of terms nested inside a term
+CLOSED: [2024-12-05 Thu 16:46]
+- list are not implicit in ASP - lack of data structures
+- one needs to associate index to model ordering of terms
+- list expressions like [a, b, c] are not supported
+- equivalently, one must have terms like term/2: term(a,0), term(b,1), term(c,2)
 ** TODO Explore temporal reasoning / Actions DSLs
-** TODO Reflection
-*** TODO Can we reflect upon an ASP module ?
+** Reflection
+*** INVALID Can we reflect upon an ASP module ?
+CLOSED: [2024-12-16 Mon 17:05]
+:LOGBOOK:
+- State "INVALID"    from "TODO"       [2024-12-16 Mon 17:05] \\
+  - Cant forsee any use cases with ASP
+  - Should be possible with python / lua apis
+  - We can use prolog with s(CASP) to enumerate over terms
+:END:
 - [ ] enumerate known predicates and terms
+**
+** TODO Build clingo natively with python support and install
+- could not invoke with python
+- pip install from anaconda works
+** TODO s(CASP) - without grounding
+*** TODO are extensions like dict suppoted other than lists ?
+* Notes
+** s(CASP) : ASP with constraints using stable model
+- vs C(ASP) standard ASP with constraints
+- s(CASP) uses partial grounding with variables and top-down goal-directed solving
+- interpreter implemented in cio prolog
+- can use CLP(fd) with constraints like #cycle
+** s(ASP) <2024-12-13 Fri 20:30>
+1. two negatively constrained variables cannot be dis-unified
+2. left recursion cannot lead to success

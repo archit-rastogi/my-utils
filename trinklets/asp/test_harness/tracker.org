@@ -1,0 +1,17 @@
+* Ideas <2024-12-16 Mon 17:08>
+** A generic test framework that understands SUT
+1. should be able to plan, create, execute workloads and destroy one or more environments.
+2. should allow end user to create, search and exercise behaviours - simple, nested and complex
+3. plan workloads, schedule workloads, execute workloads, report and optimize workloads.
+4. map and use external frameworks - terraform, python scripts, apis, etc.
+** Entities, Relations, Scopes <2024-12-16 Mon>
+1. Entities have multiple, user-defined dimensions.
+   - virtual / interface / ephermal / physical / class / environment
+   - location
+   - version
+2. A dimension may:
+   - have one or more key-value attributes
+   - administer lifecycle of related entities
+     + if an entity is destroyed, all containing entities are destroyed.
+   - can change state of entities directly or indirectly. by invoking actions, direclty or indirectly triggering
+   - interplay with other dimensions

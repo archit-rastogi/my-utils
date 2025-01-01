@@ -1,0 +1,59 @@
+* <2024-12-17 Tue 19:18>
+** creating model (a researcher) vs building useful products (ai engineer)
+** different kinds of data like images, doc or music
+- vector is an array of numbers
+- work with llms
+** what can we build using pg ?
+1. RAG
+2. search
+3. agents
+4. text - to - sql
+5. recommendation systems. anamoly detection
+** uses extension to turn pg into vector database
+- pgvector
+- pgvectorscale
+- pgai - summarization, moderation, categorization
+** extensions that depend on pgvector
+- understand how other extensions use pgvector to create suitable workloads
+** metrics to gauge
+- recall at 99%
+** how create embedding
+- openai_embed('text-embedding-3-small', quote)
+** example / cues for tests
+- order by embedding <==> (select openai_embed('text-embedding-3-small', 'something'))
+- create a function
+- batched inserts
+- number of vectors vs dimensions
+- what is filtered search and accuracy ?
+  - with where clauses
+  - combine with geo partitions
+  - geo-spatial filter
+    - not very far away
+  - time based filters - by recency
+  - permissions based filters
+- what is binary quantization ?
+- what is the cost vs pg ?
+- cant have multiple index on same columns
+- index configurations
+- top N answers, scrolling through answers
+- combine vector and keyword searches - hybrid search
+  - full text search / tsearch2 / tsvector
+- multi-tenancy
+  - one table per tenant
+  - one schema per tenant
+  - one database per tenent - hard to operate
+** vector search indexes
+- more than ~100k vectors
+- no need to use from start
+- index types
+  1. inverted file flat
+  2. hierarchical navigable small worlds
+  3. stream disk ANN - approximate nearest neighbor search - in pgvectorscale extension
+** distance functions
+1. vector_cosine_ops
+* <2024-12-23 Mon 20:44>
+** vector data type is supported without indexing
+** operators that are seem to be supported
+- l2 distance <->
+- inner product <#>
+- cosine distance <=>
