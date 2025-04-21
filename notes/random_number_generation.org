@@ -1,0 +1,28 @@
+* <2025-02-03 Mon 11:41> Description
+- For generating test data, random number generation is important.
+  Here we outline different methods and techniques available for efficient randomization.
+
+* Use case catalog
+1. generating large data sets
+2. with statistical distributions
+3. dense unique sequences in parallel
+4. generation of uncorrelated data
+5. simulation of client interaction
+6. graph based data generation tools - dependent tables, generating data for complex and realistic workflows
+7. data generation requirements:
+   1. intra row
+   2. intra table
+   3. inter table
+8. bijective permutation functions based on a linear permutation polynomial
+* Methods
+- Normal distributions: Box - Muller method
+- Related fast polar method: [[https://www.researchgate.net/publication/225242730_Normal_Gaussian_random_variables_for_supercomputers][Ref]]
+- Linear vs parallel pseudo random generation
+- Same sequence on different number of processors
+  - leap frog method
+  - sequence splitting
+- Invertible permutations, Growing offset permutation
+  - generate verifiable query workloads
+* TODO Tasks / Ideas - UN-staged
+** TODO Description language to describe database schema and data characteristics
+* References
