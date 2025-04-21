@@ -1,0 +1,42 @@
+* Objective
+1. To create cluster with TLS auth enabled without password
+2. Create client side certs
+* Cluster setup
+1. Add below tserver gflag to the cluster:
+   #+begin_src json
+     {
+         "ysql_hba_conf_csv": "ysql_hba_conf to hostssl all all all cert"
+     }
+   #+end_src
+2. Do rolling restart to enable
+* Client login using certs
+** Get certs via YBA
+1. Navigate to YBA intgerations -> Security -> Encryption in Transit
+2. Find the security config name that was used during universe creation.
+3. Download below:
+   - YSQL client certificate and key bundle.
+   - And root certificate
+** Create client certificate by self. Requires root certificate and root private key for self signing.
+1. Create cerificate signing request
+   #+begin_src shell
+     openssl req -days 3650 -new -nodes -subj '/C=IN/ST=KARNATAKA/L=Bengaluru/O=Personal/OU=Personal/emailAddress=name@test.com/CN=yugabyte' -keyout client.key -out client.csr
+   #+end_src
+   Make sure CN parameter in subj is a user already created in yugabyte. So use either yugabyte or postgres.
+
+   This step will generate client.csr.
+2. Self-sign certificate
+   #+begin_src shell
+     openssl x509 -days 3650 -req  -CAcreateserial -in client.csr -CA root.crt -CAkey ca.key.pem -out client.crt
+   #+end_src
+   - Remove the redundant client.csr after key and certs are generated.
+3. Distribute the client certs and key along with root cert.
+   - Never share server root private key!
+** Ysqlsh
+#+begin_src shell
+   ysqlsh "sslcert=client.crt sslkey=client.key sslrootcert=root.crt sslmode=verify-full" -h nodeip1:nodeip2:nodeip3
+#+end_src
+Notes:
+- sslmode must be set to either verify-full or verify-ca
+** TODO Using java to connect with TLS
+* Reference
+[[https://docs.yugabyte.com/preview/secure/tls-encryption/tls-authentication/#tls-with-password-and-certificate-authentication][Auth]]
