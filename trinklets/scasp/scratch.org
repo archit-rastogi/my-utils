@@ -1,0 +1,23 @@
+* Mind dump <2025-01-03 Fri 19:53>
+1. in EC: there are events, fluents and time points
+   - common sense law of inertia ==> release predicate
+   - continuous change ==> trajectory predicate
+2. how to model backup and restore ?
+   - let backup and restore be some event
+   - restored can occur only if backup is successful
+   - backup is taken of one or all tables in a database
+3. how to model tables ?
+   - a table is created or dropped.
+   - if table is present and not dropped, it can be manipulated.
+4. how to generate a test scenario - ideas:
+   - a state of table
+     - has column with data type vector
+     - has composite primary key
+     - has index on vector data type
+     - may have indexon other columns
+     - has 10k rows
+     - has 3 sst files
+     - may have been pitr restored atleast 3 times
+   - a table is restored
+   - a test scenario is a planned, timed narrative that can be interpreted
+     - with terms defined as abducible, we could generate multiple models

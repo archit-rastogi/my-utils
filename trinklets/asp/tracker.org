@@ -117,3 +117,12 @@ CLOSED: [2024-12-16 Mon 17:05]
 ** s(ASP) <2024-12-13 Fri 20:30>
 1. two negatively constrained variables cannot be dis-unified
 2. left recursion cannot lead to success
+** [[https://sourceforge.net/p/potassco/mailman/potassco-users/thread/9da98870-1ca1-8664-8476-ce10bd5b739b%40gemarex.com.au/][event calculus vs situation calculu and AL]]
+- describes that event vs situation vs other action languages are all ways to model actions and their impact on
+  environment
+- discusses problems around planning, non-determinism, probabilities, partial observability
+  - many approaches each with pros and cons
+  - it always eventually becomes messy and un-manageable
+- introduces concepts about introspection of facts
+  - A knows that it knows something
+- describes different approaches, tools, papers that explore the subject

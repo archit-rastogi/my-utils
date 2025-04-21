@@ -1,0 +1,4 @@
+* Notes
+** discourse
+- [[https://swi-prolog.discourse.group/t/scasp-understanding-global-constraints/4482/6][Scasp: understanding global constraints]]
+** [[https://www.cs.uni-potsdam.de/wv/publications/#DBLP:journals/tplp/BanbaraKOS17][Knowledge processing and information systems]]
