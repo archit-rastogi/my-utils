@@ -1,0 +1,34 @@
+* <2025-02-15 Sat 17:09> Bank workload improvements
+1. [ ] All threads can try to insert same row id. only one will succeed while, others will get duplicate key constraint
+   violation
+2. [ ] all threads pick same id to delete, only one succeeds
+* IDEAS
+1. [ ] With returning clause
+2. [ ] Schema variations
+   1. [ ] Mixed : colocation + non-colocation
+   2. [ ] Foreign key
+      1. [ ] associate group ids to id. compute sum per group, aggregate for all groups.
+      2. [ ] Group debuts and credits. transfer money from one group to another.
+         - money is debited and credited arbitrarily to group members.
+   3. [ ] Geo-partitioned tables
+      - [ ] txn within a geography
+      - [ ] txn across geography
+   4. [ ] Schema based DDLs
+      - [ ] account closure as a process
+        -> row is deleted and archived -> use nulls for account closure -> foreign key based
+      - [ ] do range partitoning as number of account increase
+3. [ ] Bulk insert new accounts
+4. [ ] Bulk delete accounts
+5. [ ] Bulk update accounts
+6. [ ] Update account id (updating primary key)
+7. [ ] Skewed transactions
+   - [ ] one tablet has 90% of all debits/credits
+   - [ ] two tablets have 90% of all debits and credits
+   - [ ] wait queue is limited to maximum by number of write threads.
+     - use bulk debits and credits
+8. [ ] closed accounts
+   1. [ ] nulls to indicate account is closed
+   2. [ ] foreign key to track accounts that are active, closed.
+   3. [ ] delete row for account - forget.
+9. [ ] account transfer
+10. [ ] enforce unique ids across accounts

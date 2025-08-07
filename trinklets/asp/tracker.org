@@ -21,6 +21,10 @@ CLOSED: [2024-11-27 Wed 21:31]
 - [ ] bootstrap
 - [ ] flush
 *** TODO Advanced or smart Query generation
+**** TODO Fixing incorrect queries
+**** TODO Compute PG compatibility score
+- inspired by [[https://github.com/secp256k1-sha256/postgres-compatibility-index/blob/main/postgres-compatibility-index/readme.md][PostgreSQL Compatibility Index]]
+**** TODO Generate semantically similar query but with better performance
 *** TODO Generating stress scenarios
 *** TODO Generating topologies and transitions
 - [ ] single to multiple regions
@@ -33,6 +37,7 @@ CLOSED: [2024-11-27 Wed 21:31]
 - [ ] bootstrapping
 - [ ] deleting tablet and doing remote bootstrap
 - [ ] under-replication -> replication
+*** TODO Generate scenarios for inter-leaved txns
 ** TODO Persist enumerated solutions and reuse
 - [ ] Can we turn specs into executable code ?
   1. enumerate and persist
@@ -54,12 +59,15 @@ CLOSED: [2024-11-27 Wed 21:31]
 ** TODO Master fail-over
 ** TODO Smart handling of region failures
 - [[https://yugabyte.slack.com/archives/C02AEKG6F46/p1704584168525689][Topology aware smart driver handling of region failures]]
-** TODO Compute PG compatibility score
-- inspired by [[https://github.com/secp256k1-sha256/postgres-compatibility-index/blob/main/postgres-compatibility-index/readme.md][PostgreSQL Compatibility Index]]
+** TODO Query completion
+while writing queries
+- add alais to a table, columns are updated accordingly
+- add a with keyword, complete the remaining template
+- more complex: add a group by clause, update projection
 * TODO pg15 Upgrade
 1. [ ] online upgrade
 2. [ ] correctness verification
-* TODO Proof Of Concepts [4/14]
+* TODO Proof Of Concepts [6/26]
 ** TODO Playground - ASP by potassco
 *** DONE Invoke external code from ASP - Python
 CLOSED: [2024-12-05 Thu 14:35]
@@ -91,7 +99,12 @@ CLOSED: [2024-12-05 Thu 16:46]
 - one needs to associate index to model ordering of terms
 - list expressions like [a, b, c] are not supported
 - equivalently, one must have terms like term/2: term(a,0), term(b,1), term(c,2)
-** TODO Explore temporal reasoning / Actions DSLs
+** DONE Explore temporal reasoning / Actions DSLs
+CLOSED: [2025-08-07 Thu 22:34]
+- BEC - basic event calculus - in scasp is worth exploring
+- Models use Events, Fluents and Trajectory
+- One could define causal rules capturing impact of event on fluent
+- trajectory defines how fluents change over time
 ** Reflection
 *** INVALID Can we reflect upon an ASP module ?
 CLOSED: [2024-12-16 Mon 17:05]
@@ -106,8 +119,23 @@ CLOSED: [2024-12-16 Mon 17:05]
 ** TODO Build clingo natively with python support and install
 - could not invoke with python
 - pip install from anaconda works
-** TODO s(CASP) - without grounding
-*** TODO are extensions like dict suppoted other than lists ?
+** WIP s(CASP) - without grounding
+*** DONE are extensions like dict suppoted other than lists ?
+CLOSED: [2025-08-07 Thu 22:34]
+- yes.
+- arbitrary uninterpreted terms can used, hence dicts too
+** TODO Generating Queries
+*** TODO Model + Dcg Generator -> Query
+**** TODO Dcg grammar for postgres
+**** TODO Dcg + scasp to help with missing information
+**** TODO Can Dcg + CHR + scasp help with missing imformation ?
+**** TODO Explore patterns like freeze ?
+**** TODO how to handle lists ?
+*** TODO Query + pg tokensier -> Model
+*** TODO Mode aware parsing - when to parse vs when to generate
+*** TODO Fixing Queries
+**** TODO Parse syntactically or semantically incorrect query into a model
+**** TODO Use model to regenerate the query
 * Notes
 ** s(CASP) : ASP with constraints using stable model
 - vs C(ASP) standard ASP with constraints
@@ -126,3 +154,5 @@ CLOSED: [2024-12-16 Mon 17:05]
 - introduces concepts about introspection of facts
   - A knows that it knows something
 - describes different approaches, tools, papers that explore the subject
+* Dcg
+** Hands-on

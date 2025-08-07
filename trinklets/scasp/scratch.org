@@ -21,3 +21,138 @@
    - a table is restored
    - a test scenario is a planned, timed narrative that can be interpreted
      - with terms defined as abducible, we could generate multiple models
+* Mind dump <2025-05-10 Sat 00:14>
+1. Lets try to generate some sequence of high level actions.
+2. Then we can try to zoom in to actions
+** <2025-05-12 Mon 10:42> Use event calculus to generate ordering for steps.
+for example, an outline of a probable design:
+#+begin_comment
+execute a goal: test bootstrap.
+every event represents an action.
+
+adding a node(e1) -> provision(e2) -> download software(e3) -> install software(e4) -> start tserver(e5)
+-> tserver joins the group(e6) -> load balancer identifies and start moving tablets to the the new node (e7) -> remove over
+replication
+
+e7 -> triggers remote bootstrap.
+
+so, the goal must be expanded to sub-goal.
+#+end_comment
+
+g1
+  g11
+      g111
+      g112
+      ..
+      g11N
+  g12
+  ..
+  ..
+  g1N
+
+
+  if goal is g112: then sequence is g111
+  if goal is g111: then execute the parent as goal: g11 nd so on.
+*** perhaps we need an extension of BEC, where there is a notion of parent event that triggers one or more child events, executing linearly or concurrently.
+* Notes
+- Can we generate intricate sequence of events ?
+- it would be awesome if have while box model checking tools.
+- in practice, creating models a too hard.
+- testing abstraction can miss errors
+* s(casp) general notes
+** not vs -
+#+begin_src prolog
+  cross :- not train.
+
+  %% vs
+
+  cross :- -train.
+#+end_src
+
+- not train succeeds when we cannot prove if train is true.
+  - in classical prolog, the query fails. s(casp) cross succeeds.
+** not rules implies forall
+so if we want assert closed world logic.
+- lets say, there can be no t=other columns for a table than listed.
+  #+begin_src prolog
+    -table_column(T, C) :- not table_column(T, C).
+  #+end_src
+
+  if c1 cannot be proved to belong to table t1, than -table_column(t1, c1) is definitely false.
+** Therefore, we can/should avoid unnecssary forall
+- if we can assume closed world semantics
+- so we can create predicates like
+  #+begin_src prolog
+      not_table_column(T,C) :- body.
+  #+end_src
+  instead.
+* Alternate worlds
+Lets say we have 3 tests
+t1, t2, t3
+
+t1 and t2 requires gflag f1=a
+t3 requires requires gflag f1=b
+
+we need to set gflag before starting any test. set_flag(a), set_flag(b)
+
+There are below sequence
+1. set_flag(a) -> t1 -> t2 -> set_flag(b) -> t3
+2. set_flag(a) -> t1 -> set_flag(b) -> t3 -> set_flag(a) -> t2
+
+** Model
+* Mind dump <2025-06-28 Sat 21:40>
+** TODO Given a set of facts, emit a valid SQL query
+- use dcg's to construct the sql query ?
+- only postgresql dialect. identify scope to handle other dialects
+- Given a sql query, infer one or more facts.
+- what are facts ?
+  + ddl(verb('create')) -> drop, alter, etc.
+  + ddl(object('table')) -> index
+** TODO Postgresql Concurrency Modeling with s(casp)
+*** Objective
+1. generate all possible concurrency test scenarios with oracles (with expectations)
+*** How ?
+**** Approaches
+1. Given a possible world and N observers, verify the observed results for each observer.
+2. Given a set of objects, generate all valid scenarios.
+***** Tasks [0/2]
+1. [ ] Prepare a working env
+2. [ ] Simplest scenario
+   - t1_key_x <= belongs to table t1, column x identified by key
+   - 1 observer
+     1. r, w
+     2. w, r
+     3. r, r, w
+     4. w, w, w, r
+* <2025-08-26 Tue 00:56> co-induction
+1. recursion is operational semantics for induction
+   - induction - reason about infinte lists
+   - it useful for reasoning about finite things
+2. similarly for co-induction, operational semantics must be defined - co-recursion.
+   - recursion without a base case
+   - finite atoms for infinite structures
+* Local constraints vs global constraints
+local constraints -> test-and-generate
+global constraints -> generate-and-test
+* Fixed-point semantcois
+** Least fixed point
+** Greatest fixed point
+* Explainable Triage
+** in-flight analysis
+- something failed
+  - why it failed ?
+  - what important evidence is needed ?
+  - can we do a workaround and get away
+  - can universe be reparied
+  - can we retry the step, does it reproduce ?
+** post mortem analysis
+- do a triage
+- test issue vs product issue
+** profiling a workload
+- a workload is running.
+- we capture metrics, step, concurrent nemesis, universe state
+- learn important characteristics
+- output:
+  - regression alert
+  - reproducibility
+  - behavior learning

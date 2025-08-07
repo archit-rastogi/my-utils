@@ -2,3 +2,14 @@
 ** discourse
 - [[https://swi-prolog.discourse.group/t/scasp-understanding-global-constraints/4482/6][Scasp: understanding global constraints]]
 ** [[https://www.cs.uni-potsdam.de/wv/publications/#DBLP:journals/tplp/BanbaraKOS17][Knowledge processing and information systems]]
+* AI
+** TODO Run all zeno examples
+- understand how queries terminate
+** TODO Understand modified EC axioms
+- implenation of ca_terminate / can_release / etc. predicates
+- how are not_stopped / not_startedIn implemented ?
+- how is epsilon implemented
+** TODO play with forall implementation in s(casp) context
+** TODO Understand forward reasoning
+** TODO Try generating narratives for zeno examples
+** TODO Does zeno detection work in swi-prolog ?
