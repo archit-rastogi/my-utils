@@ -1,0 +1,21 @@
+* <2025-06-20 Fri 13:13>
+1. Taking cue from modelling virtual home where:
+   - type: defines the type or class of objects, sharing common <?>
+   - attribute: captures properties of entity
+   - state: a runtime, mutable property
+   - category:
+2. We need to create rules for generating ddls for schema.
+3. A schema is collection of pg objects.
+   1. Every object has a unique name within a schema.
+4. To create a table:
+   - generate_table_name
+** taxanomy
+1. database objects
+   1. schema
+   2. table
+   3. index
+   4. sequences
+   5. constraints
+   6. triggers
+   7. functions
+   8. views

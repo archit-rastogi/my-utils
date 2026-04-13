@@ -1,0 +1,78 @@
+* Problem Statement <2025-08-30 Sat 00:29>
+** Test Generation
+Test case generation and to partition the test cases into test classes.
+** Test Oracle OR Bi-Simulation
+* Approaches
+1. Generating queries
+   - handle inter-leaved dependencies with a query like correlated joins
+   - query characteristics - use temp tables, with clauses, nested queries, etc
+   - query normalization
+     - express query as sequences of ops, like a query plan.
+2. Bi-simulation with Inter-leaved transactions
+   1. Against vanilla postgres
+   2. Without postgres
+      - Test case generation and a test oracle at the same time
+        1. given a direct graph that describes a deadlock with N txns,
+           simulate the scenario by generating a sequence of queries running concurrently
+      - Or, do bisumation
+   3. when a query is run,
+      1. what are the expected rows to be returned
+      2. whether the query will wait ?
+      3. if there is a deadlock, how the directed graph will look like ?
+3. Bi-directional parsing
+
+
+
+
+* Problems with recursion:
+1. We need different search strategies to expore different paths.
+   - most common methods are randomization
+   - Or, heuristics provided as user ipnputs. Like, depth.
+
+
+* SQL Test Generation Research
+** ERM - Entity Relational Models
+1. entities -> query
+   - generate one or more entity types
+   - generate a transformation
+     1. select one or more entity
+     2. select one or more attributes of entity
+     3. generate a sequence of steps to transform the selected attributes
+   - given the transformation
+     1. generate different possible worlds
+     2. generate DDLs to create such worlds
+     3. generate a semantically equivalent query for the transformation
+2. N query -> Txn
+3. N Txn -> Workload
+** Relational Algebra
+We can refine entity based approach by considering relational algebra.
+So, we could explore
+- bi-directional conversion from sql <-> relational algebra
+- generating algebric formulas to generate SQL queries ?
+** Map Views
+** Transformation
+*** SQL Query Representation / Terms / Vocabulary
+- grammar_rule('SELECT')
+- column('column1')
+*** Steps
+- read e(id, x)
+- write e(id, x, y)
+
+
+
+entity_name(person).
+
+entity_attributes(person, name).
+entity_attributes(person, age).
+entity_attributes(person, city).
+
+entity_name(city).
+entity_attributes(city, name).
+entity_attributes(city, state).
+
+
+select * from person;
+   -> read(person(X, [name, age, city]))
+   --> read(person(X, name)), read(person(X, age)), read(person(X, city))
+
+select name from person inner join (select age from person) p3;

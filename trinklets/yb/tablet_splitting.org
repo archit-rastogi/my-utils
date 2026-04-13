@@ -1,0 +1,54 @@
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with ‘C-x C-f’ and enter text in its buffer.
+
+* Queries to solve
+- Given that a workload is running, assume equal key distribution.
+  - How many tablets are present at time t1 ?
+  - How many split happened ?
+  - What is the tablet split depth level at time t1 ?
+- Which tablets recieved a larger share of load at any time ?
+- What should workload look like to exercise tablet split path from 1 ... N ?
+
+* Assumptions
+- Hash partitioned tables only.
+- Workload generates uniform distribution across hash range
+- tablet is partitioned based on size of tablet
+
+* Fluent
+1. table_tablets
+2.
+
+* Events
+1. split_happened(tablet(1, t1))
+
+* Trajectory
+
+* Common sense of inertia
+- value of a fluent can change.
+- due to external influences.
+
+* scratch pad
+** Facts
+#+begin_src prolog
+
+#+end_src
+
+** Encoding
+#+begin_src prolog
+
+  tablet(Id).
+
+  happened(split(tablet(Id))) :-
+
+
+
+
+#+end_src
+* BEC Axioms Glossary
+1. initiates
+2. holdsAt
+3. -holdAt
+4. initiallyN
+5. initiallyP
+6.
+7.

@@ -1,0 +1,7 @@
+* mark
+1. dont trust ai to create sql. too many edge cases. but indexes maybe.
+2. if we batch queries and reduce round trips. sql equivalance.
+3. no knowledge of optimizers. no deep CBO knowledge.
+4. multi-tenancy - logical resource management
+* call home
+- use call home data for qa experiments

@@ -1,0 +1,77 @@
+* dcg_select.pl [3/3]
+1. [X] Experiment with bi-directional query generation
+   - [X] given values, output a well formed query using templates
+   - [X] given a free variable and well formed query, bind varibles with correct values
+2. [X] higher order dcg predicates like foreach
+   - we used foreach to delimit items in a list of columns
+   - the generated string is a valid projection to used in select query
+3. [X] scasp + dcg ?
+   - if columns are not provided ?
+   - can we fetch columns from table name ?
+   - if we cannot fetch column names, then use a *
+* scratch <2025-08-13 Wed 01:12>
+1. there are many helper tools and libraries for dcg in external packs
+   Some that may be useful:
+   - parsing optionals, sequences, seuquence of sequences, etc.
+   - bidirection parsing utils
+   - extended dcg for passing accumaltors - could make life easier.
+2. tor: extensible hookable disjunction for modular search
+   - exploring a search tree with different search strategies.
+3. If going on the path to implement grammar for sql:
+   - better to deep-dove on different parsing approaches
+     - LL, SLR, tabling, etc
+     - lazy parsing
+* Searching:
+1. prolog backtracking based search
+2. clp(fd) with labeling - search / enumerate solutions
+3. scasp - goal driven partial answer sets
+4. ASP - with multi-world semantics
+** Exploring the idea:
+- Enumerate scenarios - top-down
+- Test Scenario driven enumeration - bottom-up
+* Idea Backlogs
+** SQL ops design
+** SQL execution protocol
+- running 2 statements at 2 distinct timeintervals.
+  what is the smallest granular time when 2 statements can be issued back to back ?
+  so we can determistically tell 1 stmt preceeds the other at all times.
+* <2025-09-09 Tue 21:52> Grammar productions + Constraints
+- select col1 from t1;
+  {column(t1), table(t1), database(db1), ... }
+
+** Research
+1. we need to narrow down a query representation that we can reason about.
+2. sql to algebric expression using algebric theory.
+   1. NULL is not supported ?
+   2. something with attributes of relational operators ?
+3. Transform query to CLP under set semantics. Use a solver.
+   - No duplicate tupels are allowed. But real application have bag semantics.
+4. Symbolic approach under bag semantics.
+
+** Bag semantics
+1. QPSR - query pair symbolic representation
+2. SMT solver to prove existence of bijective mapping.
+3. SQL queries are classified into 4 categories - with category specific algorithms.
+   Categories:
+   1. Table query
+   2. SPJ -> select-project-join
+   3. Aggregate query
+   4. Union query
+4. Representaion
+   - tree representation - similar to logical execution plan
+   - Union normal Form
+
+* Problem Directions
+** Generate queries
+** Given a query,
+
+
+* Query features
+1. arithmetic operations
+2. suppoerting NULL
+3. sub-queries
+4. grouping
+5. aggregate functions
+
+* Ant Finnancial Services Group
+- has 486 real world sql queries
